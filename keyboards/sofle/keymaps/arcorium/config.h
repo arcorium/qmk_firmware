@@ -5,15 +5,17 @@
 
 #define CUSTOM_LAYER_READ //if you remove this it causes issues - needs better guarding
 
-#define TRI_LAYER_LOWER_LAYER 2
-#define TRI_LAYER_UPPER_LAYER 3
-#define TRI_LAYER_ADJUST_LAYER 4
+#define NO_ALT_REPEAT_KEY
+
+#define TRI_LAYER_LOWER_LAYER 3
+#define TRI_LAYER_UPPER_LAYER 4
+#define TRI_LAYER_ADJUST_LAYER 5
 
 #define QUICK_TAP_TERM 0
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
-    #define TAPPING_TERM 200
 #endif
+#define TAPPING_TERM 200
 #define ENCODER_DIRECTION_FLIP
 
 
