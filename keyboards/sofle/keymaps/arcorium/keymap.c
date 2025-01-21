@@ -124,9 +124,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.                    ,-----------------------------------------.
    * |  -   |  -   |  -   |  -   |  -   |  -   |                    |  -   |  -   |  -   |  -   |  -   |  -   |
    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-   * | TAB  |  -   |  -   |  -   |  -   |  -   |                    |  -   |  -   |  -   |  -   | -/6  | Bspc |
+   * | TAB  |  LMS |  PMS |  MMS |  NMS |  RMS |                    |  SCL |  SCD |  SCU |  SCR | -/6  | Bspc |
    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-   * |LSFT/CAP| -  |  -   |  -   |  -   |  -   |-------.    ,-------|  -   |  -   |  -   |  -   |  - |RSFT/WIN|
+   * |LSFT/CAP| -  |  -   |  -   |  -   |  -   |-------.    ,-------| LEFT | DOWN |  UP  | RIGHT|  - |RSFT/WIN|
    * |------+------+------+------+------+------|  MUTE |    | PAUSE |------+------+------+------+------+------|
    * |LSFT/WIN| -  |  -   |  -   |  -   |  -   |-------|    |-------|  -   |  -   |  -   |  -   |  - |RCTL/ESC|
    * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NULLED] = LAYOUT(
     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    KC_TAB,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SWITCH, KC_BSPC,
+    KC_TAB,      MS_BTN1, MS_BTN4, MS_BTN3, MS_BTN5, MS_BTN2,                            MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLD, KC_SWITCH, KC_BSPC,
     KC_LSFT_CAP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RSFT_WIN,
     KC_LCTL_WIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,          KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RCTL_ESC,
                 KC_LGUI, KC_LGUI, KC_LALT_TILDE, TL_LOWR, KC_SPC,                    KC_ENT, TL_UPPR, KC_RALT_B, KC_RGUI, KC_RGUI
@@ -147,11 +147,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.                    ,-----------------------------------------.
    * |  -   |  -   |  -   |  -   |  -   |  -   |                    |  -   |  -   |  -   |  -   |  -   |  -   |
    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-   * | TAB  |  -   |  7   |  8   |  9   | NUM  |                    | NUM  |  7   |  8   |  9   | -/6  | Bspc |
+   * | TAB  |  -   |  9   |  8   |  7   | NUM  |                    | NUM  |  7   |  8   |  9   | -/6  | Bspc |
    * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-   * |  /   |  +   |  4   |  5   |  6   |  .   |-------.    ,-------|  .   |  4   |  5   |  6   |  +   |   /  |
+   * |  /   |  +   |  6   |  5   |  4   |  .   |-------.    ,-------|  .   |  4   |  5   |  6   |  +   |   /  |
    * |------+------+------+------+------+------|  MUTE |    | PAUSE |------+------+------+------+------+------|
-   * |  ^   |  *   |  1   |  2   |  3   |  0   |-------|    |-------|  0   |  1   |  2   |  3   |  *   |  ^   |
+   * |  ^   |  *   |  3   |  2   |  1   |  0   |-------|    |-------|  0   |  1   |  2   |  3   |  *   |  ^   |
    * `-----------------------------------------/       /     \      \-----------------------------------------'
    *          |      |      | LALT/` |LOWER | / SPACE /       \ ENTER\  |RAISE | RALT/B |      |      |
    *          |      |      |        |      |/       /         \      \ |      |        |      |      |
@@ -160,9 +160,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMPAD] = LAYOUT(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    KC_TAB,  KC_PMNS, KC_P7,   KC_P8,   KC_P9,   KC_NUM,                      KC_NUM, KC_P7, KC_P8, KC_P9, KC_SWITCH, KC_BSPC,
-    KC_PSLS, KC_PPLS, KC_P4,   KC_P5,   KC_P6,   KC_PDOT,                     KC_PDOT, KC_P4, KC_P5, KC_P6, KC_PPLS, KC_PSLS,
-    S(KC_6), KC_PAST, KC_P1,   KC_P2,   KC_P3,   KC_P0, KC_MUTE,     KC_MPLY, KC_P0, KC_P1, KC_P2, KC_P3, KC_PAST, S(KC_6),
+    KC_TAB,  KC_PMNS, KC_P9,   KC_P8,   KC_P7,   KC_NUM,                      KC_NUM, KC_P7, KC_P8, KC_P9, KC_SWITCH, KC_BSPC,
+    KC_PSLS, KC_PPLS, KC_P6,   KC_P5,   KC_P4,   KC_PDOT,                     KC_PDOT, KC_P4, KC_P5, KC_P6, KC_PPLS, KC_PSLS,
+    S(KC_6), KC_PAST, KC_P3,   KC_P2,   KC_P1,   KC_P0, KC_MUTE,     KC_MPLY, KC_P0, KC_P1, KC_P2, KC_P3, KC_PAST, S(KC_6),
             KC_LGUI, KC_LGUI, KC_LALT_TILDE, TL_LOWR, KC_SPC,           KC_PENT, TL_UPPR, KC_RALT_B, KC_RGUI, KC_RGUI
   ),
   /* LOWER
