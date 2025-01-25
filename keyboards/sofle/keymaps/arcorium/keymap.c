@@ -94,7 +94,6 @@ tap_dance_action_t tap_dance_actions[] = {
 #define KC_LALT_TILDE LALT_T(KC_TILDE)
 #define KC_RALT_B RALT_T(KC_B)
 #define KC_RALT_ESC RALT_T(KC_ESC)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
    * QWERTY
@@ -338,7 +337,7 @@ void keyboard_post_init_user(void)
 
 static void render_logo(void)
 {
-  /*static const char PROGMEM qmk_logo[] = {
+  static const char PROGMEM qmk_logo[] = {
     0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92,
     0x93, 0x94,
     0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2,
@@ -347,15 +346,15 @@ static void render_logo(void)
     0xD3, 0xD4, 0x00
   };
 
-  oled_write_P(qmk_logo, false);*/
+  oled_write_P(qmk_logo, false);
 
-  uint8_t mods = get_mods();
+  /*uint8_t mods = get_mods();
   oled_write_ln_P(PSTR("-----"), true);
   oled_write_ln_P(PSTR("ALT  \n"), mods & MOD_MASK_ALT);
   oled_write_ln_P(PSTR("SHIFT\n"), mods & MOD_MASK_SHIFT);
   oled_write_ln_P(PSTR("CTRL \n"), mods & MOD_MASK_CTRL);
   oled_write_ln_P(PSTR("SUPER"), mods & MOD_MASK_GUI);
-  oled_write_ln_P(PSTR("-----"), true);
+  oled_write_ln_P(PSTR("-----"), true);*/
 }
 
 static void print_status_narrow(void)
@@ -409,25 +408,18 @@ static void print_status_narrow(void)
 
   // Host Keyboard LED Status
   led_t led_state = host_keyboard_led_state();
-  if (led_state.num_lock) {
-   oled_write_ln_P(PSTR("NUM"), false);
-  }
-  if (led_state.caps_lock) {
-   oled_write_ln_P(PSTR("CAP"), false);
-  }
-  if (led_state.scroll_lock) {
-   oled_write_ln_P(PSTR("SCR"), false);
-  }
-
+  oled_write_ln_P(PSTR(" NUM "), led_state.num_lock);
+  oled_write_ln_P(PSTR(" CAP "), led_state.caps_lock);
+  oled_write_ln_P(PSTR(" SCR "), led_state.scroll_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation)
 {
-  // if (is_keyboard_master())
-  // {
+  if (is_keyboard_master())
+  {
     return OLED_ROTATION_270;
-  // }
-  // return rotation;
+  }
+  return rotation;
 }
 
 bool oled_task_user(void)
