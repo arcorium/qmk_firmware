@@ -93,6 +93,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define KC_RSFT_WIN TD(TD_RSFT_WIN)
 #define KC_LALT_TILDE LALT_T(KC_TILDE)
 #define KC_RALT_B RALT_T(KC_B)
+#define KC_RALT_ESC RALT_T(KC_ESC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
@@ -114,9 +115,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     KC_TAB,      KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_C_P,  KC_BSPC,
-    KC_LSFT_CAP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RSFT_WIN,
-    KC_LCTL_WIN, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MPLY, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL_ESC,
-          KC_LGUI, KC_LGUI, KC_LALT_TILDE, TL_LOWR, KC_SPC,                 KC_ENT, TL_UPPR, KC_RALT_B, KC_RGUI, KC_RGUI
+    KC_LSFT_CAP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, MT(MOD_RALT, KC_ESC),
+    KC_LCTL_WIN, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MPLY, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RALT_ESC,
+          XXXXXXX, XXXXXXX, KC_LALT_TILDE, TL_LOWR, KC_SPC,                 KC_ENT, TL_UPPR, KC_RALT_B, XXXXXXX, XXXXXXX
   ),
 
   /*
@@ -139,8 +140,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     KC_TAB,      MS_BTN1, MS_BTN4, MS_BTN3, MS_BTN5, MS_BTN2,                            MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLD, KC_SWITCH, KC_BSPC,
     KC_LSFT_CAP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RSFT_WIN,
-    KC_LCTL_WIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,          KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RCTL_ESC,
-                KC_LGUI, KC_LGUI, KC_LALT_TILDE, TL_LOWR, KC_SPC,                    KC_ENT, TL_UPPR, KC_RALT_B, KC_RGUI, KC_RGUI
+    KC_LCTL_WIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,          KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT_ESC,
+                XXXXXXX, XXXXXXX, KC_LALT_TILDE, TL_LOWR, KC_SPC,                    KC_ENT, TL_UPPR, KC_RALT_B, XXXXXXX, XXXXXXX
   ),
   /*
    * NUMPAD
@@ -163,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_PMNS, KC_P9,   KC_P8,   KC_P7,   KC_NUM,                      KC_NUM, KC_P7, KC_P8, KC_P9, KC_SWITCH, KC_BSPC,
     KC_PSLS, KC_PPLS, KC_P6,   KC_P5,   KC_P4,   KC_PDOT,                     KC_PDOT, KC_P4, KC_P5, KC_P6, KC_PPLS, KC_PSLS,
     S(KC_6), KC_PAST, KC_P3,   KC_P2,   KC_P1,   KC_P0, KC_MUTE,     KC_MPLY, KC_P0, KC_P1, KC_P2, KC_P3, KC_PAST, S(KC_6),
-            KC_LGUI, KC_LGUI, KC_LALT_TILDE, TL_LOWR, KC_SPC,           KC_PENT, TL_UPPR, KC_RALT_B, KC_RGUI, KC_RGUI
+            XXXXXXX, XXXXXXX, KC_LALT_TILDE, TL_LOWR, KC_SPC,           KC_PENT, TL_UPPR, KC_RALT_B, XXXXXXX, XXXXXXX
   ),
   /* LOWER
    * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -337,7 +338,7 @@ void keyboard_post_init_user(void)
 
 static void render_logo(void)
 {
-  static const char PROGMEM qmk_logo[] = {
+  /*static const char PROGMEM qmk_logo[] = {
     0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92,
     0x93, 0x94,
     0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2,
@@ -346,7 +347,15 @@ static void render_logo(void)
     0xD3, 0xD4, 0x00
   };
 
-  oled_write_P(qmk_logo, false);
+  oled_write_P(qmk_logo, false);*/
+
+  uint8_t mods = get_mods();
+  oled_write_ln_P(PSTR("-----"), true);
+  oled_write_ln_P(PSTR("ALT  \n"), mods & MOD_MASK_ALT);
+  oled_write_ln_P(PSTR("SHIFT\n"), mods & MOD_MASK_SHIFT);
+  oled_write_ln_P(PSTR("CTRL \n"), mods & MOD_MASK_CTRL);
+  oled_write_ln_P(PSTR("SUPER"), mods & MOD_MASK_GUI);
+  oled_write_ln_P(PSTR("-----"), true);
 }
 
 static void print_status_narrow(void)
@@ -400,18 +409,25 @@ static void print_status_narrow(void)
 
   // Host Keyboard LED Status
   led_t led_state = host_keyboard_led_state();
-  oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
-  oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
-  oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+  if (led_state.num_lock) {
+   oled_write_ln_P(PSTR("NUM"), false);
+  }
+  if (led_state.caps_lock) {
+   oled_write_ln_P(PSTR("CAP"), false);
+  }
+  if (led_state.scroll_lock) {
+   oled_write_ln_P(PSTR("SCR"), false);
+  }
+
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation)
 {
-  if (is_keyboard_master())
-  {
+  // if (is_keyboard_master())
+  // {
     return OLED_ROTATION_270;
-  }
-  return rotation;
+  // }
+  // return rotation;
 }
 
 bool oled_task_user(void)
