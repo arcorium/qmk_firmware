@@ -204,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     KC_ESC,  KC_MINS, KC_UNDS, KC_LBRC,    KC_RBRC,    KC_BSLS,                         KC_EXLM, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL,
-    _______, KC_EQL,  KC_LCTL, S(KC_LBRC), S(KC_RBRC), KC_PIPE,                         KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_SCLN, _______,
+    _______, KC_EQL,  KC_PLUS, S(KC_LBRC), S(KC_RBRC), KC_PIPE,                         KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_SCLN, _______,
     _______, KC_LABK, KC_RABK, KC_QUES,    KC_QUOT,    KC_DQUO, _______,       _______, KC_INS, KC_HOME, KC_END, KC_PGUP, KC_PGDN, _______,
                          _______, _______, _______, _______, KC_ENT,               KC_SPC, _______, _______, _______, _______
   ),
@@ -381,9 +381,8 @@ static void print_status_narrow(void)
   default:
     oled_write_ln_P(PSTR("Undef"), false);
   }
-  oled_write_P(PSTR("\n\n"), false);
+  oled_write_P(PSTR("\n"), false);
   // Print current layer
-  oled_write_ln_P(PSTR("LAYER"), false);
   switch (get_highest_layer(layer_state))
   {
   case _QWERTY:
@@ -619,4 +618,18 @@ bool encoder_update_user(uint8_t index, bool clockwise)
   return true;
 }
 
+#endif
+
+#ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+
+        case KC_SM_SW:
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
 #endif
