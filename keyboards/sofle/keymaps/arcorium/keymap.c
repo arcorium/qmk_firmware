@@ -78,7 +78,6 @@ enum
 tap_dance_action_t tap_dance_actions[] = {
   [TD_LSFT_CAP] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
   [TD_LCTL_WIN] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LWIN),
-  [TD_RCTL_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_ESC),
   [TD_RSFT_WIN] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_RWIN),
 };
 
@@ -90,11 +89,10 @@ tap_dance_action_t tap_dance_actions[] = {
 #define KC_SWITCH LT(_SWITCH, XXXXXXX)
 #define KC_LSFT_CAP TD(TD_LSFT_CAP)
 #define KC_LCTL_WIN TD(TD_LCTL_WIN)
-#define KC_RCTL_ESC TD(TD_RCTL_ESC)
 #define KC_RSFT_WIN TD(TD_RSFT_WIN)
 #define KC_LALT_TILDE LALT_T(KC_TILDE)
 #define KC_RALT_B RALT_T(KC_B)
-#define KC_RALT_ESC RALT_T(KC_ESC)
+#define KC_RCTL_ESC RCTL_T(KC_ESC)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
    * QWERTY
@@ -116,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     KC_TAB,      KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
     KC_LSFT_CAP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SM_SW, KC_RSFT_WIN,
-    KC_LCTL_WIN, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MPLY, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RALT_ESC,
+    KC_LCTL_WIN, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MPLY, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL_ESC,
           XXXXXXX, XXXXXXX, KC_LALT_TILDE, TL_LOWR, KC_SPC,                 KC_ENT, TL_UPPR, KC_RALT_B, XXXXXXX, XXXXXXX
   ),
 
@@ -140,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     KC_TAB,      MS_BTN1, MS_BTN4, MS_BTN3, MS_BTN5, MS_BTN2,                            MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLD, XXXXXXX, KC_BSPC,
     KC_LSFT_CAP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SWITCH, KC_RSFT_WIN,
-    KC_LCTL_WIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,          KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT_ESC,
+    KC_LCTL_WIN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,          KC_MPLY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RCTL_ESC,
                 XXXXXXX, XXXXXXX, KC_LALT_TILDE, TL_LOWR, KC_SPC,                    KC_ENT, TL_UPPR, KC_RALT_B, XXXXXXX, XXXXXXX
   ),
   /*
@@ -381,7 +379,7 @@ static void print_status_narrow(void)
   default:
     oled_write_ln_P(PSTR("Undef"), false);
   }
-  oled_write_P(PSTR("\n"), false);
+
   // Print current layer
   switch (get_highest_layer(layer_state))
   {
@@ -406,6 +404,7 @@ static void print_status_narrow(void)
     oled_write_ln_P(PSTR("Undef"), false);
   }
 
+  oled_write_P(PSTR("\n"), false);
   // Host Keyboard LED Status
   led_t led_state = host_keyboard_led_state();
   oled_write_ln_P(PSTR(" NUM "), led_state.num_lock);
